@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    {% block js %}
+    {% endblock %}
+  </head>
+  <body>
+
+    {% if user.is_authenticated %}
+
+    <nav class="navbar navbar-default navbar-static-top">
+
+      <div class="container">
+        <ul class="nav navbar-nav">
+          <li><a class="navbar-link" href="{% url 'home' %}">HOME</a></li>
+          <li><a class="navbar-link" href="{% url 'Candidate:choicefilling' %}">Choice_Filling</a></li>
+          <li><a class="navbar-link" href="{% url 'Candidate:change_password' %}">Change Password</a></li>
+          <li><a class="navbar-link" href="{% url 'logout' %}">Log Out</a></li>
+
+        </ul>
+      </div>
+
+    </nav>
+
+    <div class="container">
+      <h4 class="text-center text-danger">HELLO {{user.username}}</h4>
+
+      <h3>
+        Your Final Seat as of now is {{seat}}
+      </h3>
+
+
+          <br>
+      {% block body_block %}
+
+<br>
+      <br>
+      <h4>
+        To freeze your seat, submit the following form.
+      </h4>
+      <div class="container">
+        <div style="background-color:#b0e0e6" class="jumbotron">
+<form action="{% url 'tofreeze' %}" method="post">
+            {% csrf_token %}
+            {{ freeze.as_p }}
+            <input type="submit" class="btn btn-primary" name="" value="FREEZE">
+      </form>
+</div>
+</div>
+<h4>
+        To Float your seat, submit the following form.
+      </h4>
+      <div class="container">
+        <div style="background-color:#b0e0e6" class="jumbotron">
+<form action="{% url 'tofreeze' %}" method="post">
+            {% csrf_token %}
+            {{ freeze.as_p }}
+            <input type="submit" class="btn btn-primary" name="" value="FLOAT">
+      </form>
+</div>
+</div>
+<h4>
+        To Slide your seat, submit the following form.
+      </h4>
+      <div class="container">
+        <div style="background-color:#b0e0e6" class="jumbotron">
+<form action="{% url 'toslide' %}" method="post">
+            {% csrf_token %}
+            {{ freeze.as_p }}
+            <input type="submit" class="btn btn-primary" name="" value="SLIDE">
+      </form>
+</div>
+</div>
+
+        <h4>
+        To Quit the counselling, submit the following form.
+      </h4>
+      <div class="container">
+        <div style="background-color:#b0e0e6" class="jumbotron">
+<form action="{% url 'toremove' %}" method="post">
+            {% csrf_token %}
+            {{ freeze.as_p }}
+            <input type="submit" class="btn btn-primary" name="" value="REMOVE">
+      </form>
+</div>
+</div>
+
+      {% endblock %}
+
+    </div>
+
+
+    {% else %}
+      <br>
+      <br>
+
+      <div class="container mt-5">
+        <h2 class="text-center text-danger">JEE SEAT ALLOCATION</h2>
+        <br>
+        <br>
+          <div style="background-color:#b0e0e6" class="jumbotron text-center">
+
+
+
+          <form action={% url 'Candidate:user_login' %} method="post">
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input type="text" name="username" placeholder="Username">
+            <br>
+            <br>
+
+            <label for="password">Password</label>
+            <input type="password" name="password" placeholder="Password">
+            <br>
+            <br>
+
+            <input type="submit" class="btn  btn-danger" name="" value="Login">
+          </form>
+
+        </div>
+
+      </div>
+
+      <div class="container">
+        <div style="background-color:#b0e0e6" class="jumbotron text-center">
+
+          <h4 class="text-danger">Haven't Registered, Register!</h4>
+
+          <a href={% url 'Candidate:register' %} class="text-danger"><button type=submit class="btn btn-primary">REGISTER</button></a>
+        </div>
+
+      </div>
+
+
+    {% endif %}
+
+
+  </body>
+</html>
