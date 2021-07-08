@@ -1,0 +1,268 @@
+{% extends 'Candidate/base.html' %}
+{% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+{% endblock %}
+
+{% block body_block %}
+<!-- <div class="container">
+<div class="jumbotron">
+<form method="post" action="{% url 'Candidate:choicefilling' %}">
+  {% csrf_token %}
+ {% for x in branchrem %}
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="{{x.college.name}}-{{x.name}}" id="{{x.college.name}}-{{x.name}}" name="choice">
+  <label class="form-check-label" for="{{x.college.name}}-{{x.name}}" >
+    {{x.college.name}}-{{x.name}}
+  </label>
+</div>
+
+
+
+  {% endfor %}
+   <script type="text/javascript">
+     //Near checkboxes
+    $('.form-check-input').on('change', function() {
+        $('.form-check-input').not(this).prop('checked', false);
+    });
+  </script>
+
+<button type="submit" class="btn btn-primary" name="ADD">ADD</button>
+</form>
+</div>
+</div> -->
+
+  {% if lock == 0 %}
+    <div class="container">
+      <div style="background-color:#b0e0e6" class="jumbotron">
+      	<h5 class="text-center text-danger">ADD CHOICES ONE BY ONE</h5>
+        <input type="text" id="myInput3" onkeyup="myFunction3()" placeholder="Search for College" title="Type in College">
+        <input type="text" id="myInput4" onkeyup="myFunction4()" placeholder="Search for Branch" title="Type in Branch">
+        <br><br>
+
+        <form action="{% url 'Candidate:choicefilling' %}" method="post">
+        {% csrf_token %}
+
+        <table class="table table-hover" style="width:100%" id="myTable2">
+        <tr>
+          <th>Select</th>
+          <th>COLLEGE</th>
+          <th>BRANCH</th>
+        </tr>
+
+        {% for x in branchrem %}
+
+        <tr>
+          <td><input class="form-check-input1" type="checkbox" value="{{ x.college.name }}-{{ x.name }}" id="{{ x.college.name }}-{{ x.name }}" name="choice"  ></td>
+          <td>{{ x.college.name }}</td>
+          <td>{{ x.name }}</td>
+        </tr>
+
+        {% endfor %}
+        <script type="text/javascript">
+		     //Near checkboxes
+		    $('.form-check-input1').on('change', function() {
+		        $('.form-check-input1').not(this).prop('checked', false);
+		    });
+		</script>
+
+      </table>
+
+      <br>
+
+          <button type="submit" name="ADD" class="btn btn-success">ADD</button>
+
+    </form>
+
+      </div>
+    </div>
+{% endif %}
+
+    <div class="container">
+      <div style="background-color:#b0e0e6" class="jumbotron">
+        {% if lock == 0 %}
+      	<h5 class="text-center text-danger">REMOVE CHOICES ONE BY ONE</h5>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for College" title="Type in College">
+        <input type="text" id="myInput1" onkeyup="myFunction1()" placeholder="Search for Branch" title="Type in Branch">
+        {% else %}
+        <h5 class="text-center text-danger">YOUR LOCKED CHOICES</h5>
+        <input type="text" id="myInput1" onkeyup="myFunction2()" placeholder="Search for College" title="Type in College">
+        <input type="text" id="myInput" onkeyup="myFunction5()" placeholder="Search for Branch" title="Type in Branch">
+        {% endif %}
+
+        <br><br>
+         {% if lock == 0 %}
+        <form action="{% url 'Candidate:choicefilling' %}" method="post">
+        {% csrf_token %}
+        {% endif %}
+        <table class="table table-hover" style="width:100%" id="myTable">
+        <tr>
+          {% if lock == 0 %}
+          <th>Select</th>
+          {% endif %}
+          <th>PREFERENCE NUMBER</th>
+          <th>COLLEGE</th>
+          <th>BRANCH</th>
+        </tr>
+        {% for x in branchprefdone %}
+        <tr>
+          {% if lock == 0 %}
+          <td><input class="form-check-input1" type="checkbox" value="{{ x.college.name }}-{{ x.name }}" id="{{ x.college.name }}-{{ x.name }}" name="Rchoice"  ></td>
+          {% endif %}
+          <td>{{ forloop.counter }}</td>
+          <td>{{ x.college.name }}</td>
+          <td>{{ x.name }}</td>
+        </tr>
+
+        {% endfor %}
+        <script type="text/javascript">
+		     //Near checkboxes
+		    $('.form-check-input1').on('change', function() {
+		        $('.form-check-input1').not(this).prop('checked', false);
+		    });
+		</script>
+
+      </table>
+{% if lock == 0 %}
+      <br>
+
+          <button type="submit" name="REMOVE" class="btn btn-danger">REMOVE</button>
+
+    </form>
+{% endif %}
+      </div>
+    </div>
+
+
+ <script>
+        function myFunction()
+        {
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("myInput");
+          filter = input.value.toLowerCase();
+          table = document.getElementById("myTable");
+          tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[2];
+          if (td)
+          {
+            txtValue = td.textContent.toLowerCase() || td.innerText.toLowerCase();
+            if (txtValue.indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      }
+function myFunction5()
+        {
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("myInput");
+          filter = input.value.toLowerCase();
+          table = document.getElementById("myTable");
+          tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[2];
+          if (td)
+          {
+            txtValue = td.textContent.toLowerCase() || td.innerText.toLowerCase();
+            if (txtValue.indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      }
+
+
+      function myFunction1()
+        {
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("myInput1");
+          filter = input.value.toLowerCase();
+          table = document.getElementById("myTable");
+          tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[3];
+          if (td)
+          {
+            txtValue = td.textContent.toLowerCase() || td.innerText.toLowerCase();
+            if (txtValue.indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      }
+       function myFunction2()
+        {
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("myInput1");
+          filter = input.value.toLowerCase();
+          table = document.getElementById("myTable");
+          tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[1];
+          if (td)
+          {
+            txtValue = td.textContent.toLowerCase() || td.innerText.toLowerCase();
+            if (txtValue.indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      }
+
+
+
+       function myFunction3()
+        {
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("myInput3");
+          filter = input.value.toLowerCase();
+          table = document.getElementById("myTable2");
+          tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[1];
+          if (td)
+          {
+            txtValue = td.textContent.toLowerCase() || td.innerText.toLowerCase();
+            if (txtValue.indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      }
+
+
+      function myFunction4()
+        {
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("myInput4");
+          filter = input.value.toLowerCase();
+          table = document.getElementById("myTable2");
+          tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[2];
+          if (td)
+          {
+            txtValue = td.textContent.toLowerCase() || td.innerText.toLowerCase();
+            if (txtValue.indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      }
+  </script>
+
+
+{% endblock %}
+</html>
