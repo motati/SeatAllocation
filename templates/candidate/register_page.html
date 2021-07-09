@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Register</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+	<br>
+	<br><br>
+<div class="container">
+        <div style="background-color:#b0e0e6" class="jumbotron">
+
+          <h4 class="text-danger">ENTER YOUR DETAILS HERE...</h4>
+<form action="{% url 'Candidate:register' %}" method="post">     
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ info_form.as_p }}
+            <input type="submit" class="btn btn-primary" name="" value="Register">
+</form>
+
+</div>
+</div>
+</body>
+</html>
