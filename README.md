@@ -18,3 +18,11 @@ A web platform similar to https://josaa.nic.in (Official counseling platform to 
 **More improvements to be done:**
 1. Addition of more complicated factors like Foreign National and Specially Abled Category.
 2. Improvements on the frontend.
+# `This is the Login page`
+![Screenshot (4)](https://user-images.githubusercontent.com/72252670/126107038-1bdb5901-9b61-4660-bea0-14189691d30b.png)
+
+
+# `Here is the register account page of the website`
+![Screenshot (7)](https://user-images.githubusercontent.com/72252670/126107062-8b540e0e-54ae-40e2-acdc-72548fcb148c.png)
+
+
