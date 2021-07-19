@@ -25,4 +25,5 @@ A web platform similar to https://josaa.nic.in (Official counseling platform to 
 # `Here is the register account page of the website`
 ![Screenshot (7)](https://user-images.githubusercontent.com/72252670/126107062-8b540e0e-54ae-40e2-acdc-72548fcb148c.png)
 
-
+# `Here is the choice filling page of the website`
+![image](https://user-images.githubusercontent.com/72252670/126110790-c8423c0f-1dfb-4bce-b911-778eb4d47d13.png)
