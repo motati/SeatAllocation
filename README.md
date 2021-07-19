@@ -14,9 +14,6 @@ A web platform similar to https://josaa.nic.in (Official counseling platform to 
 3. It takes care of various factors like gender and category in determining the matching.
 4. Final list of the students with the colleges is made ready.
 
-**More improvements to be done:**
-1. Addition of more complicated factors like Foreign National and Specially Abled Category.
-2. Improvements on the frontend.
 # `This is the Login page`
 ![Screenshot (4)](https://user-images.githubusercontent.com/72252670/126107038-1bdb5901-9b61-4660-bea0-14189691d30b.png)
 
