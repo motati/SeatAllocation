@@ -1,13 +1,13 @@
-# SeatAllocation
-
-A web platform similar to https://josaa.nic.in (Official counseling platform to allocate seats to JEE candidates)
-
 **Gale Shapley Algorithm** : [Wiki](https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm)
 
 **Stable Matching** : [Wiki](https://en.wikipedia.org/wiki/Stable_marriage_problem)
 
+# SeatAllocation
 
-**How it works:**
+We developed a web platform similar to https://josaa.nic.in 
+(It is the official counseling platform to allocate seats to JEE candidates)
+
+**Working:**
 
 1. Students fill their preferences and lock their choices before the deadline.
 2. The Allocator then runs the algorithm for each round allocating the student to the respective colleges. (Multiple round allocation is implemented).
